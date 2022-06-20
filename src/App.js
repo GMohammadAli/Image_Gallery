@@ -11,15 +11,15 @@ function App() {
   useEffect(() => {
       axios
         .get(`https://pixabay.com/api/?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${term}&image_type=photo`)
-        .then((data) => {
-          console.log(data);
-          setImages(data.hits);
+        .then((res) => {
+          setImages(res.data.hits);
           setIsLoading(false);
         })
         .catch((err) => console.log(err));
   }, [term]);
 
   return (
+    <>
     <div className="container mx-auto">
       <ImageSearch searchText={(text) => setTerm(text)} />
 
@@ -37,6 +37,7 @@ function App() {
         </div>
       )}
     </div>
+    </>
   );
 }
 
